@@ -26,18 +26,12 @@ app.use(async (req, res) => {
   proxy.web(req, res, { target: sv.address });
 });
 
-proxy.on("proxyReq", (proxyReq, req, res) => {
-  //   const target = proxyReq._target.href;
-  //   connectionCounts[target] = (connectionCounts[target] || 0) + 1;
-});
+proxy.on("proxyReq", (proxyReq, req, res) => {});
 
 proxy.on("end", (req, res) => {
-  //   const target = req.headers.host;
-  //   connectionCounts[target] = Math.max(0, (connectionCounts[target] || 0) - 1);
   const sv = leastConnections.pick();
-  // sv.complete();
-  sv.connections -= 1;
-  console.log(sv);
+  // sv.connections -= 1;
+  // console.log(sv);
 });
 
 app.listen(port, () => {

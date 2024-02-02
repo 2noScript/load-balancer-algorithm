@@ -34,7 +34,7 @@ export class Base {
   }
 
   pick(): Server {
-    return new Server("localhost:300");
+    return new Server("localhost:3000");
   }
 
   get size() {
