@@ -1,11 +1,19 @@
-import { Address, Pool } from "../models";
+import { Address, Pool } from "./types";
+
+interface IServerOptions {
+  weight: number;
+}
+
 export class Server {
-  private _address: Address;
+  private readonly _address: Address;
+  private readonly _weight: number;
   private _connections: number;
-  constructor(address: Address) {
+  constructor(address: Address, options?: IServerOptions) {
     this._address = address;
+    this._weight = options?.weight ?? 0;
     this._connections = 0;
   }
+
   get address() {
     return this._address;
   }
@@ -19,8 +27,12 @@ export class Server {
   get connections() {
     return this._connections;
   }
+  get weight() {
+    return this._weight;
+  }
 }
-export class Base {
+
+export abstract class BaseAlgorithm {
   private readonly _pool: Pool;
   private readonly _servers: Server[];
 
@@ -33,13 +45,7 @@ export class Base {
     this._servers = servers;
   }
 
-  pick(): Server {
-    return new Server("localhost:3000");
-  }
-
-  get size() {
-    return this._pool?.length ?? 0;
-  }
+  abstract pick(): Server;
   get servers() {
     return this._servers;
   }
