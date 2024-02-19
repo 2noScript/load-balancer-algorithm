@@ -1,11 +1,3 @@
-// import Random from "./random";
-// import RoundRobin from "./round-robin";
-// import LeastConnections from "./least-connections";
-
-// const LBA = {
-//   Random,
-//   RoundRobin,
-//   LeastConnections,
-// };
-
-// export default LBA;
+export { Random } from "./random";
+export { RoundRobin } from "./round-robin";
+export { LeastConnections } from "./least-connections";

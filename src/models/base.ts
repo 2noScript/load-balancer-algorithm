@@ -32,17 +32,18 @@ export class Server {
   }
 }
 
+interface IAlgorithmOptions {
+  requestIp: Address;
+}
 export abstract class BaseAlgorithm {
   private readonly _pool: Pool;
   private readonly _servers: Server[];
+  private readonly _options!: IAlgorithmOptions;
 
-  constructor(pool: Pool) {
+  constructor(pool: Pool, options?: IAlgorithmOptions) {
     this._pool = pool;
-    const servers: Server[] = [];
-    for (const item of pool) {
-      servers.push(new Server(item));
-    }
-    this._servers = servers;
+    this._servers = pool.map((address) => new Server(address));
+    if (options) this._options = options;
   }
 
   abstract pick(): Server;

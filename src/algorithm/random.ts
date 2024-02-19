@@ -1,11 +1,9 @@
+import { BaseAlgorithm, Server } from "../models/base";
 import { sample } from "../utils";
 
-// export default class Random extends Base {
-//   pick(): Server {
-//     const currentServe = sample(this.servers);
-//     return currentServe;
-//   }
-//   servers(servers: any) {
-//     throw new Error("Method not implemented.");
-//   }
-// }
+export class Random extends BaseAlgorithm {
+  pick(): Server {
+    const useServer = sample(this.servers);
+    return useServer;
+  }
+}
