@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "start-test":"ts-node test/index.ts"
   },
   "prepare": "yarn build",
   "license": "MIT",
