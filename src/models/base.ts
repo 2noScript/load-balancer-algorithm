@@ -1,16 +1,12 @@
 import { Address, Pool } from "./types";
 
-interface IServerOptions {
-  weight: number;
-}
-
 export class Server {
   private readonly _address: Address;
   private readonly _weight: number;
   private _connections: number;
-  constructor(address: Address, options?: IServerOptions) {
-    this._address = address;
-    this._weight = options?.weight ?? 0;
+  constructor(pool: Pool) {
+    this._address = pool.address;
+    this._weight = pool?.weight ?? 0;
     this._connections = 0;
   }
 
@@ -18,11 +14,7 @@ export class Server {
     return this._address;
   }
   set connections(currentConnections: number) {
-    if (currentConnections < 0) {
-      this._connections = 0;
-      return;
-    }
-    this._connections = currentConnections;
+    this._connections = currentConnections < 0 ? 0 : currentConnections;
   }
   get connections() {
     return this._connections;
@@ -32,21 +24,15 @@ export class Server {
   }
 }
 
-interface IAlgorithmOptions {
-  requestIp: Address;
-}
 export abstract class BaseAlgorithm {
-  private readonly _pool: Pool;
+  private readonly _poolList: Pool[];
   private readonly _servers: Server[];
-  private readonly _options!: IAlgorithmOptions;
-
-  constructor(pool: Pool, options?: IAlgorithmOptions) {
-    this._pool = pool;
-    this._servers = pool.map((address) => new Server(address));
-    if (options) this._options = options;
+  constructor(poolList: Pool[]) {
+    this._poolList = poolList;
+    this._servers = poolList.map((pool) => new Server(pool));
   }
 
-  abstract pick(): Server;
+  abstract pick(requestIp?: Address): Server;
   get servers() {
     return this._servers;
   }
