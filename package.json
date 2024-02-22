@@ -9,9 +9,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "start-test":"ts-node test/index.ts"
+    "start-test": "ts-node test/index.ts"
   },
-  "prepare": "yarn build",
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.21",
@@ -22,6 +21,7 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
+    "crypto": "^1.0.1",
     "express": "^4.18.2",
     "http-proxy-middleware": "^2.0.6"
   }

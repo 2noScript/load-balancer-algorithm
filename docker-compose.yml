@@ -1,39 +1,48 @@
-version: '3'
+version: '3.8'
 
 
 services:
   server1:
+    working_dir: /home/app
+    container_name: sv1 
     build:
-      context: .
       dockerfile: Dockerfile
-    restart: always
     ports:
-      - "7001:3000"
+      - "4001:3000"
+    restart: always
   server2:
+    container_name: sv2
+    working_dir: /home/app
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     ports:
-      - "7002:3000"
+      - "4002:3000"
+    restart: always
   server3:
+    container_name: sv3
+    working_dir: /home/app
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     ports:
-      - "7003:3000"
+      - "4003:3000"
+    restart: always
   server4:
+    container_name: sv4
+    working_dir: /home/app
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     ports:
-      - "7004:3000"
+      - "4004:3000"
+    restart: always
   server5:
+    working_dir: /home/app
+    container_name: sv5
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     ports:
-      - "7005:3000"
+      - "4005:3000"
+    restart: always
