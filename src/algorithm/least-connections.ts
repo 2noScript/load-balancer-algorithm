@@ -1,7 +1,8 @@
 import { BaseAlgorithm, Server } from "../models/base";
+import { Address } from "../models/types";
 
 export class LeastConnections extends BaseAlgorithm {
-  pick(): Server {
+  pick(requestIp?: Address): Server {
     let leastConnections = Infinity;
     let useServer: Server = this.servers[0];
     for (const sv of this.servers) {
